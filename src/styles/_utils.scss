@@ -1,0 +1,39 @@
+$background-color: #fbfbfb;
+$main-color: #f3a95f;
+$highlight-color: #f09134;
+$lightgray-color: #8e8e8e;
+
+@mixin input($width, $height, $border-radius, $font-size) {
+  width: $width;
+  height: $height;
+  margin-bottom: 32px;
+  padding-left: 20px;
+  border: 1px solid $lightgray-color;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  color: $lightgray-color;
+}
+
+@mixin btn($width, $height, $font-size) {
+  width: $width;
+  height: $height;
+  border: transparent;
+  border-radius: 10px;
+  background-color: $main-color;
+  outline: none;
+  font-size: $font-size;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.input-account {
+  @include input(70%, 50px, 30px, 16px);
+}
+.input-account:focus {
+  outline: none;
+  border-color: #f09134;
+}
+
+.btn-main {
+  @include btn(70%, 50px, 16px);
+}
