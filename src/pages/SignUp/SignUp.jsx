@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { requestSignup } from "../../services/AuthService";
 import styles from "./Signup.module.scss";
 
 const SignUp = () => {
@@ -32,8 +33,11 @@ const SignUp = () => {
     if (pw !== rePw) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
-      alert("로그인 성공");
-      navigate("/auth");
+      const response = await requestSignup(email, pw);
+      if (response !== "error") {
+        alert("회원 가입되었습니다.");
+        navigate("/auth");
+      }
     }
   };
 
