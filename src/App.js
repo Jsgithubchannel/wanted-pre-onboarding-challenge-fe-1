@@ -1,10 +1,10 @@
-import "./App.css";
+import "./App.scss";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Auth from "./pages/Auth/Auth";
 import SignUp from "./pages/SignUp/SignUp";
-import Main from "./pages/Main";
 import PublicRoute from "./routers/PublicRoute";
 import PrivateRoute from "./routers/PrivateRoute";
+import TodoList from "./pages/Todo/TodoList";
 
 function App() {
   return (
@@ -16,7 +16,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
           </Route>
           <Route element={<PrivateRoute />}>
-            <Route path="/" element={<Main />} />
+            <Route path="/" element={<TodoList />} />
           </Route>
         </Routes>
       </Router>

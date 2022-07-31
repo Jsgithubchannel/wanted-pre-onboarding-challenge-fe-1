@@ -1,12 +1,11 @@
-$background-color: #fbfbfb;
 $main-color: #f3a95f;
 $highlight-color: #f09134;
 $lightgray-color: #8e8e8e;
 
-@mixin input($width, $height, $border-radius, $font-size) {
+@mixin input($width, $height, $margin-bottom, $border-radius, $font-size) {
   width: $width;
   height: $height;
-  margin-bottom: 32px;
+  margin-bottom: $margin-bottom;
   padding-left: 20px;
   border: 1px solid $lightgray-color;
   border-radius: $border-radius;
@@ -27,11 +26,15 @@ $lightgray-color: #8e8e8e;
 }
 
 .input-account {
-  @include input(70%, 50px, 30px, 16px);
+  @include input(70%, 50px, 32px, 30px, 16px);
 }
 .input-account:focus {
   outline: none;
   border-color: #f09134;
+}
+
+.input-todo {
+  @include input(100%, 30px, 0, 0, 16px);
 }
 
 .btn-main {
