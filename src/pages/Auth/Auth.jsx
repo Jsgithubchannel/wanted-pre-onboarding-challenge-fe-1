@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { requestLogin } from "../../services/AuthService";
 import styles from "./Auth.module.scss";
 
 const Auth = () => {
@@ -26,7 +27,11 @@ const Auth = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    alert("로그인 성공");
+    const response = await requestLogin(email, pw);
+    if (response === "success") {
+      alert("성공적으로 로그인 했습니다");
+      navigate("/");
+    }
   };
 
   useEffect(() => {

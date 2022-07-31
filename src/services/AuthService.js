@@ -14,19 +14,16 @@ export const requestSignup = async (email, pw) => {
 
 export const requestLogin = async (email, pw) => {
   return await axios
-    .post(
-      `http://localhost:8080/users/login`,
-      {
-        email: email,
-        password: pw,
-      }
-      // { withCredentials: true }
-    )
+    .post(`http://localhost:8080/users/login`, {
+      email: email,
+      password: pw,
+    })
     .then((response) => {
-      return response.data;
+      localStorage.setItem("token", response.data.token);
+      return "success";
     })
     .catch((e) => {
-      console.log(e.response.data);
-      return e.response.data;
+      alert(e.response.data.details);
+      return "error";
     });
 };
