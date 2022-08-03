@@ -10,17 +10,20 @@ const TodoList = () => {
   const [tasks, setTasks] = useState([
     {
       index: 0,
-      text: "Task1",
+      title: "Task1",
+      content: "task1_content입니다",
       isCompleted: false,
     },
     {
       index: 1,
-      text: "Task2",
+      title: "Task2",
+      content: "task2_content입니다",
       isCompleted: false,
     },
     {
       index: 2,
-      text: "Task3",
+      title: "Task3",
+      content: "task3_content입니다",
       isCompleted: false,
     },
   ]);
@@ -39,12 +42,14 @@ const TodoList = () => {
       <div className={styles.todoList}>
         {tasks.map((task, index) => (
           <div className={styles.todo} key={task.index}>
-            <span
-              className={styles.todoText}
+            <div
+              className={styles.paragraph}
               onClick={() => navigate(`/detail/${index}`, { state: index })}
             >
-              {task.text}
-            </span>
+              <span className={styles.todoTitle}>{task.title}</span>
+              <p className={styles.todoContent}>{task.content}</p>
+            </div>
+
             <button onClick={() => removeTask(index)}>
               <FontAwesomeIcon icon={faTrash} />
             </button>

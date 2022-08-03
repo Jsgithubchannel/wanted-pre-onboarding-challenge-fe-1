@@ -47,6 +47,16 @@
   }
 }
 
-.todoText {
+.paragraph {
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
+
+  & > * {
+    text-align: start;
+  }
+}
+.todoContent {
+  font-size: 0.8em;
+  color: rgb(60, 60, 60);
 }
