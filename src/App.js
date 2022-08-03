@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import PublicRoute from "./routers/PublicRoute";
 import PrivateRoute from "./routers/PrivateRoute";
 import TodoList from "./pages/Todo/TodoList";
+import TodoDetail from "./pages/TodoDetail/TodoDetail";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           </Route>
           <Route element={<PrivateRoute />}>
             <Route path="/" element={<TodoList />} />
+            <Route path="/detail/:id" element={<TodoDetail />} />
           </Route>
         </Routes>
       </Router>

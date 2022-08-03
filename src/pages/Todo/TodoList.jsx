@@ -3,7 +3,10 @@ import TodoForm from "./TodoForm";
 import styles from "./TodoList.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 const TodoList = () => {
+  const navigate = useNavigate();
+
   const [tasks, setTasks] = useState([
     {
       index: 0,
@@ -36,7 +39,12 @@ const TodoList = () => {
       <div className={styles.todoList}>
         {tasks.map((task, index) => (
           <div className={styles.todo} key={task.index}>
-            <span className={styles.todoText}>{task.text}</span>
+            <span
+              className={styles.todoText}
+              onClick={() => navigate(`/detail/${index}`, { state: index })}
+            >
+              {task.text}
+            </span>
             <button onClick={() => removeTask(index)}>
               <FontAwesomeIcon icon={faTrash} />
             </button>
