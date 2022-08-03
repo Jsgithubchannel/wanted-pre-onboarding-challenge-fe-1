@@ -18,3 +18,14 @@
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
   }
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.paragraph {
+  height: 140px;
+  margin-top: 2px;
+}
