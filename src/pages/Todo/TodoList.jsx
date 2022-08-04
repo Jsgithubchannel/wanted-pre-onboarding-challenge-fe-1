@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import TodoForm from "./TodoForm";
 import styles from "./TodoList.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faPenToSquare,
+  faCircleCheck,
+  faCircleXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 const TodoList = () => {
   const navigate = useNavigate();
+  const [edited, setEdited] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
+  const [newContent, setNewContent] = useState("");
+
+  const editTitleRef = useRef(null);
+
+  useEffect(() => {
+    if (edited) {
+      editTitleRef.current.focus();
+    }
+  }, [edited]);
 
   const [tasks, setTasks] = useState([
     {
@@ -28,7 +44,41 @@ const TodoList = () => {
     },
   ]);
 
-  const addTask = (text) => setTasks([...tasks, { text }]);
+  const onNavigate = (id) => {
+    !edited && navigate(`/detail/${id}`, { state: id });
+  };
+
+  const onClickEditBtn = () => {
+    setEdited(true);
+  };
+  const onChangeEditTask = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+    switch (name) {
+      case "title":
+        setNewTitle(value);
+        break;
+      case "content":
+        setNewContent(value);
+        break;
+
+      default:
+    }
+  };
+  const onClickSubmitBtn = (id) => {
+    const nextTodoList = tasks.map((task) => ({
+      ...task,
+      title: task.id === id ? newTitle : task.title,
+      content: task.id === id ? newContent : task.title,
+    }));
+    setTasks(nextTodoList);
+    setEdited(false);
+  };
+
+  const addTask = (title, content) => {
+    setTasks([...tasks, { title, content }]);
+  };
 
   const removeTask = (index) => {
     const newTasks = [...tasks];
@@ -41,19 +91,56 @@ const TodoList = () => {
       <h1>오늘 할 일</h1>
       <div className={styles.todoList}>
         {tasks.map((task, index) => (
-          <div className={styles.todo} key={task.index}>
-            <div
-              className={styles.paragraph}
-              onClick={() => navigate(`/detail/${index}`, { state: index })}
-            >
-              <span className={styles.todoTitle}>{task.title}</span>
-              <p className={styles.todoContent}>{task.content}</p>
+          <li className={styles.todo} key={task.index}>
+            <div className={styles.paragraph} onClick={() => onNavigate(index)}>
+              {edited ? (
+                <>
+                  <input
+                    type="text"
+                    name="title"
+                    value={newTitle}
+                    ref={editTitleRef}
+                    onChange={onChangeEditTask}
+                  />
+                  <input
+                    type="text"
+                    name="content"
+                    value={newContent}
+                    onChange={onChangeEditTask}
+                  />
+                </>
+              ) : (
+                <>
+                  <span className={styles.todoTitle}>{task.title}</span>
+                  <p className={styles.todoContent}>{task.content}</p>
+                </>
+              )}
             </div>
 
-            <button onClick={() => removeTask(index)}>
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
-          </div>
+            {edited ? (
+              <div className={styles.btns}>
+                <FontAwesomeIcon
+                  icon={faCircleCheck}
+                  onClick={onClickSubmitBtn}
+                />
+                <FontAwesomeIcon
+                  icon={faCircleXmark}
+                  onClick={() => setEdited(false)}
+                />
+              </div>
+            ) : (
+              <div className={styles.btns}>
+                <FontAwesomeIcon
+                  icon={faPenToSquare}
+                  onClick={onClickEditBtn}
+                />
+                <FontAwesomeIcon
+                  icon={faTrash}
+                  onClick={() => removeTask(index)}
+                />
+              </div>
+            )}
+          </li>
         ))}
       </div>
       <TodoForm addTask={addTask} />
