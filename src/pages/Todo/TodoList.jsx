@@ -9,6 +9,7 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { createTodo } from "../../services/TodoService";
 const TodoList = () => {
   const navigate = useNavigate();
   const [edited, setEdited] = useState(false);
@@ -78,6 +79,7 @@ const TodoList = () => {
 
   const addTask = (title, content) => {
     setTasks([...tasks, { title, content }]);
+    createTodo(title, content);
   };
 
   const removeTask = (index) => {
