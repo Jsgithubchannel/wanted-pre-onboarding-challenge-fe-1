@@ -9,7 +9,7 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { createTodo, getTodos } from "../../services/TodoService";
+import { createTodo, deleteTodo, getTodos } from "../../services/TodoService";
 const TodoList = () => {
   const navigate = useNavigate();
   const [edited, setEdited] = useState(false);
@@ -69,10 +69,11 @@ const TodoList = () => {
     createTodo(title, content);
   };
 
-  const removeTask = (index) => {
+  const removeTask = (index, id) => {
     const newTasks = [...tasks];
     newTasks.splice(index, 1);
     setTasks(newTasks);
+    deleteTodo(id);
   };
 
   return (
@@ -125,7 +126,7 @@ const TodoList = () => {
                 />
                 <FontAwesomeIcon
                   icon={faTrash}
-                  onClick={() => removeTask(index)}
+                  onClick={() => removeTask(index, task.id)}
                 />
               </div>
             )}

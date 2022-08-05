@@ -9,7 +9,6 @@ export const getTodos = async () => {
   return await axios
     .get(`/api/todos`, config)
     .then((response) => {
-      console.log(response);
       return response.data;
     })
     .catch((error) => {
@@ -31,7 +30,20 @@ export const createTodo = async (title, content) => {
       config
     )
     .then((response) => {
-      console.log(response);
+      return response.data;
+    })
+    .catch((error) => {
+      alert(error.response.data.details);
+    });
+};
+
+export const deleteTodo = async (id) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return await axios
+    .delete(`/api/todos/${id}`, config)
+    .then((response) => {
       return response.data;
     })
     .catch((error) => {
