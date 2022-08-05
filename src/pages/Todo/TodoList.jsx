@@ -9,13 +9,13 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { createTodo } from "../../services/TodoService";
+import { createTodo, getTodos } from "../../services/TodoService";
 const TodoList = () => {
   const navigate = useNavigate();
   const [edited, setEdited] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
-
+  const [tasks, setTasks] = useState([]);
   const editTitleRef = useRef(null);
 
   useEffect(() => {
@@ -24,26 +24,13 @@ const TodoList = () => {
     }
   }, [edited]);
 
-  const [tasks, setTasks] = useState([
-    {
-      index: 0,
-      title: "Task1",
-      content: "task1_content입니다",
-      isCompleted: false,
-    },
-    {
-      index: 1,
-      title: "Task2",
-      content: "task2_content입니다",
-      isCompleted: false,
-    },
-    {
-      index: 2,
-      title: "Task3",
-      content: "task3_content입니다",
-      isCompleted: false,
-    },
-  ]);
+  useEffect(() => {
+    const get = async () => {
+      const response = await getTodos();
+      setTasks(response.data);
+    };
+    get();
+  }, []);
 
   const onNavigate = (id) => {
     !edited && navigate(`/detail/${id}`, { state: id });
