@@ -1,3 +1,4 @@
+@import "../../styles/utils.scss";
 .todo {
   display: flex;
   align-items: center;
@@ -18,10 +19,17 @@
     outline: 0;
     cursor: pointer;
     font-size: 18px;
-    color: #f37070;
   }
 }
+.trashIcon,
+.xmarkIcon {
+  color: #db6d5a;
+}
 
+.penIcon,
+.checkIcon {
+  color: #f37070;
+}
 .paragraph {
   display: flex;
   flex-direction: column;

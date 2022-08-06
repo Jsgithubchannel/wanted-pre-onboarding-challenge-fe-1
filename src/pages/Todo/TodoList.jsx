@@ -39,7 +39,6 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
         content: task.id === id ? newContent : task.content,
       }));
 
-      console.log(nextTodoList);
       setTasks(nextTodoList);
 
       await updateTask(id, newTitle, newContent);
@@ -102,18 +101,25 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
             <FontAwesomeIcon
               icon={faCircleCheck}
               onClick={() => onClickSubmitBtn(task.id)}
+              className={styles.checkIcon}
             />
             <FontAwesomeIcon
               icon={faCircleXmark}
               onClick={() => setEdited(false)}
+              className={styles.xmarkIcon}
             />
           </div>
         ) : (
           <div className={styles.btns}>
-            <FontAwesomeIcon icon={faPenToSquare} onClick={onClickEditBtn} />
+            <FontAwesomeIcon
+              icon={faPenToSquare}
+              onClick={onClickEditBtn}
+              className={styles.penIcon}
+            />
             <FontAwesomeIcon
               icon={faTrash}
               onClick={() => removeTask(index, task.id)}
+              className={styles.trashIcon}
             />
           </div>
         )}

@@ -61,7 +61,7 @@ const SignUp = () => {
           name="email"
           type="email"
           autoComplete="new-email"
-          placeholder="이메일"
+          placeholder="이메일 ( @ . 포함 )"
           onChange={changeInput}
           className="input-account"
           required
@@ -70,7 +70,7 @@ const SignUp = () => {
           name="password"
           type="password"
           autoComplete="new-password"
-          placeholder="비밀번호"
+          placeholder="비밀번호 ( 8자리 이상 )"
           onChange={changeInput}
           className="input-account"
           required

@@ -1,3 +1,5 @@
+@import "../../styles/utils.scss";
+
 .container {
   border-top: 1px solid;
   display: flex;
@@ -9,12 +11,14 @@
   button {
     border: 0;
     outline: 0;
-    color: #2980b9;
+    color: $highlight-color;
+    font-size: 1.2em;
     background: #fff;
     height: 100%;
     margin-left: 8px;
     padding: 0 15px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
   }
 }
 

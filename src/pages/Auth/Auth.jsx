@@ -72,11 +72,9 @@ const Auth = () => {
         </button>
       </form>
 
-      <div className={styles.linkContainer}>
-        <p className={styles.link} onClick={() => navigate("/signup")}>
-          처음이신가요?
-        </p>
-      </div>
+      <p className={styles.link} onClick={() => navigate("/signup")}>
+        처음이신가요?
+      </p>
     </div>
   );
 };
