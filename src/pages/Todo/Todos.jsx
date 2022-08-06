@@ -9,7 +9,9 @@ import {
   updateTodo,
 } from "../../services/TodoService";
 import TodoList from "./TodoList";
+import { useNavigate } from "react-router-dom";
 const Todos = () => {
+  const navigate = useNavigate();
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
@@ -36,6 +38,11 @@ const Todos = () => {
     updateTodo(id, title, content);
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/auth");
+  };
+
   return (
     <div className={styles.container}>
       <h1>오늘 할 일</h1>
@@ -52,6 +59,9 @@ const Todos = () => {
         ))}
       </div>
       <TodoForm addTask={addTask} />
+      <button className={`${styles.button} btn-main`} onClick={logout}>
+        로그아웃
+      </button>
     </div>
   );
 };

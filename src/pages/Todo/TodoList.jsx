@@ -23,8 +23,8 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
     }
   }, [edited]);
 
-  const onNavigate = (id) => {
-    !edited && navigate(`/detail/${id}`, { state: id });
+  const onNavigate = (index) => {
+    !edited && navigate(`/detail/${index}`, { state: tasks[index] });
   };
 
   const onClickEditBtn = () => {
