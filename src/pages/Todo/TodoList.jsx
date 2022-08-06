@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import styles from "./TodoList.module.scss";
 
-const TodoList = ({ tasks, task, index, setTasks, removeTask }) => {
+const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
   const editTitleRef = useRef(null);
   const navigate = useNavigate();
 
@@ -18,7 +18,6 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask }) => {
   const [newContent, setNewContent] = useState("");
 
   useEffect(() => {
-    console.log(edited);
     if (edited) {
       editTitleRef.current.focus();
     }
@@ -32,14 +31,22 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask }) => {
     setEdited(true);
   };
 
-  const onClickSubmitBtn = (id) => {
-    const nextTodoList = tasks.map((task) => ({
-      ...task,
-      title: task.id === id ? newTitle : task.title,
-      content: task.id === id ? newContent : task.title,
-    }));
-    setTasks(nextTodoList);
-    setEdited(false);
+  const onClickSubmitBtn = async (id) => {
+    if (editTitleRef.current.value.length > 0) {
+      const nextTodoList = tasks.map((task) => ({
+        ...task,
+        title: task.id === id ? newTitle : task.title,
+        content: task.id === id ? newContent : task.content,
+      }));
+
+      console.log(nextTodoList);
+      setTasks(nextTodoList);
+
+      await updateTask(id, newTitle, newContent);
+      setEdited(false);
+    } else {
+      alert("제목을 입력해주세요.");
+    }
   };
 
   const onChangeEditTask = (e) => {
@@ -70,6 +77,7 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask }) => {
                 value={newTitle}
                 ref={editTitleRef}
                 onChange={onChangeEditTask}
+                required
               />
               <input
                 type="text"
@@ -88,7 +96,10 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask }) => {
 
         {edited ? (
           <div className={styles.btns}>
-            <FontAwesomeIcon icon={faCircleCheck} onClick={onClickSubmitBtn} />
+            <FontAwesomeIcon
+              icon={faCircleCheck}
+              onClick={() => onClickSubmitBtn(task.id)}
+            />
             <FontAwesomeIcon
               icon={faCircleXmark}
               onClick={() => setEdited(false)}

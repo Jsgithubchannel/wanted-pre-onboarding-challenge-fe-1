@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import TodoForm from "./TodoForm";
 import styles from "./Todos.module.scss";
 
-import { createTodo, deleteTodo, getTodos } from "../../services/TodoService";
+import {
+  createTodo,
+  deleteTodo,
+  getTodos,
+  updateTodo,
+} from "../../services/TodoService";
 import TodoList from "./TodoList";
 const Todos = () => {
   const [tasks, setTasks] = useState([]);
@@ -27,6 +32,10 @@ const Todos = () => {
     deleteTodo(id);
   };
 
+  const updateTask = (id, title, content) => {
+    updateTodo(id, title, content);
+  };
+
   return (
     <div className={styles.container}>
       <h1>오늘 할 일</h1>
@@ -38,6 +47,7 @@ const Todos = () => {
             index={index}
             setTasks={setTasks}
             removeTask={removeTask}
+            updateTask={updateTask}
           />
         ))}
       </div>

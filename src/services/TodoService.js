@@ -37,6 +37,27 @@ export const createTodo = async (title, content) => {
     });
 };
 
+export const updateTodo = async (id, title, content) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+  return await axios
+    .put(
+      `/api/todos/${id}`,
+      {
+        title: title,
+        content: content,
+      },
+      config
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      alert(error.response.data.details);
+    });
+};
+
 export const deleteTodo = async (id) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
