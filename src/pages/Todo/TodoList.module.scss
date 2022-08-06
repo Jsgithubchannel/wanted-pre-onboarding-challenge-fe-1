@@ -27,7 +27,13 @@
   flex-direction: column;
   cursor: pointer;
 }
+.content {
+  height: 140px;
+  margin-top: 2px;
+}
 .todoContent {
+  max-width: 300px;
   font-size: 0.8em;
   color: rgb(60, 60, 60);
+  word-wrap: break-word;
 }

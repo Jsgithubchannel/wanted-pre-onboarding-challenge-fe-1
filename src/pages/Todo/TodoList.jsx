@@ -77,13 +77,16 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
                 value={newTitle}
                 ref={editTitleRef}
                 onChange={onChangeEditTask}
-                required
+                className="input-todo"
+                placeholder={task.title}
               />
-              <input
+              <textarea
                 type="text"
                 name="content"
                 value={newContent}
                 onChange={onChangeEditTask}
+                className={`${styles.content} input-todo`}
+                placeholder={task.content}
               />
             </>
           ) : (

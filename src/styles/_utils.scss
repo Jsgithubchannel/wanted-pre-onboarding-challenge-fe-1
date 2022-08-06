@@ -35,6 +35,7 @@ $lightgray-color: #8e8e8e;
 
 .input-todo {
   @include input(90%, 30px, 0, 0, 16px);
+  color: black;
 }
 
 .btn-main {
