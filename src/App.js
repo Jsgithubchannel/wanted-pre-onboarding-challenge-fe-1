@@ -4,7 +4,7 @@ import Auth from "./pages/Auth/Auth";
 import SignUp from "./pages/SignUp/SignUp";
 import PublicRoute from "./routers/PublicRoute";
 import PrivateRoute from "./routers/PrivateRoute";
-import TodoList from "./pages/Todo/TodoList";
+import Todos from "./pages/Todo/Todos";
 import TodoDetail from "./pages/TodoDetail/TodoDetail";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
           </Route>
           <Route element={<PrivateRoute />}>
-            <Route path="/" element={<TodoList />} />
+            <Route path="/" element={<Todos />} />
             <Route path="/detail/:id" element={<TodoDetail />} />
           </Route>
         </Routes>
