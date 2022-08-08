@@ -4,8 +4,6 @@
 _안녕하세요. 컴퓨터 공학을 전공 중이며 (곧 졸업),_<br />
 _FE 개발자로 커리어를 시작하고 싶은 (취준생) 홍지수입니다._
 
-_저에 대한 정보를 알고 싶으시다면 링크를 참고해주세요._
-
 [LinkedIn](https://www.linkedin.com/in/jisu-hong-7a9683226/)
 [Blog](https://breathtaking-life.tistory.com/)   
 
