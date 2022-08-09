@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const requestSignup = async (email, pw) => {
   return await axios
-    .post(`http://localhost:8080/users/create`, {
+    .post(`/api/users/create`, {
       email: email,
       password: pw,
     })
@@ -14,7 +14,7 @@ export const requestSignup = async (email, pw) => {
 
 export const requestLogin = async (email, pw) => {
   return await axios
-    .post(`http://localhost:8080/users/login`, {
+    .post(`/api/users/login`, {
       email: email,
       password: pw,
     })

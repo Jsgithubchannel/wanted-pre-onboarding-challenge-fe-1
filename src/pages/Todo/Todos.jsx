@@ -55,6 +55,7 @@ const Todos = () => {
             setTasks={setTasks}
             removeTask={removeTask}
             updateTask={updateTask}
+            key={task.id}
           />
         ))}
       </div>
