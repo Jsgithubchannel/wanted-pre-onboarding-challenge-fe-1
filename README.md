@@ -1,15 +1,5 @@
 # 👩🏻‍💻 원티드 프리온보딩 챌린지 프론트엔드 코스 사전과제
 
-## 간단한 소개
-_안녕하세요. 컴퓨터 공학을 전공 중이며 (곧 졸업),_<br />
-_FE 개발자로 커리어를 시작하고 싶은 (취준생) 홍지수입니다._
-
-[LinkedIn](https://www.linkedin.com/in/jisu-hong-7a9683226/)
-[Blog](https://breathtaking-life.tistory.com/)   
-
-
-_사전과제인 Todo App을 저만의 방식으로 어떻게 제작하였는지 보여드리겠습니다._
-
 ##  기능 / 소개
 ### Login / SignUp
 - /auth 경로에 로그인, /signup에 회원가입 기능 구현 완료
