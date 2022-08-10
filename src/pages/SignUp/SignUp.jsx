@@ -10,24 +10,6 @@ const SignUp = () => {
   const [rePw, setRePw] = useState("");
   const [isDisabled, setDisabled] = useState(true);
 
-  const changeInput = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-    switch (name) {
-      case "email":
-        setEmail(value);
-        break;
-      case "password":
-        setPw(value);
-        break;
-      case "reEnterPassword":
-        setRePw(value);
-        break;
-      default:
-    }
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
     if (pw !== rePw) {
@@ -62,7 +44,7 @@ const SignUp = () => {
           type="email"
           autoComplete="new-email"
           placeholder="이메일 ( @ . 포함 )"
-          onChange={changeInput}
+          onChange={(e) => setEmail(e.target.value)}
           className="input-account"
           required
         />
@@ -71,7 +53,7 @@ const SignUp = () => {
           type="password"
           autoComplete="new-password"
           placeholder="비밀번호 ( 8자리 이상 )"
-          onChange={changeInput}
+          onChange={(e) => setPw(e.target.value)}
           className="input-account"
           required
         />
@@ -80,7 +62,7 @@ const SignUp = () => {
           type="password"
           autoComplete="new-password"
           placeholder="비밀번호 확인"
-          onChange={changeInput}
+          onChange={(e) => setRePw(e.target.value)}
           className="input-account"
           required
         />

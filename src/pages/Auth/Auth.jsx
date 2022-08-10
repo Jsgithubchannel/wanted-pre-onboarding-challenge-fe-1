@@ -9,22 +9,6 @@ const Auth = () => {
   const [pw, setPw] = useState("");
   const [isDisabled, setDisabled] = useState(true);
 
-  const changeInput = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-    switch (name) {
-      case "email":
-        setEmail(value);
-        break;
-      case "password":
-        setPw(value);
-        break;
-
-      default:
-    }
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
     const response = await requestLogin(email, pw);
@@ -50,7 +34,7 @@ const Auth = () => {
           type="email"
           autoComplete="current-email"
           placeholder="이메일"
-          onChange={changeInput}
+          onChange={(e) => setEmail(e.target.value)}
           required
           className="input-account"
         />
@@ -59,7 +43,7 @@ const Auth = () => {
           type="password"
           autoComplete="current-password"
           placeholder="비밀번호"
-          onChange={changeInput}
+          onChange={(e) => setPw(e.target.value)}
           required
           className="input-account"
         />
