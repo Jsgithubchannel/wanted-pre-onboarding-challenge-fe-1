@@ -28,10 +28,12 @@ const Todos = () => {
   };
 
   const removeTask = (index, id) => {
-    const newTasks = [...tasks];
-    newTasks.splice(index, 1);
-    setTasks(newTasks);
-    deleteTodo(id);
+    if (window.confirm("삭제하시겠습니까?")) {
+      const newTasks = [...tasks];
+      newTasks.splice(index, 1);
+      setTasks(newTasks);
+      deleteTodo(id);
+    }
   };
 
   const updateTask = (id, title, content) => {

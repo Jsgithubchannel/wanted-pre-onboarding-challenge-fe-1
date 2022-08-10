@@ -32,19 +32,21 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
   };
 
   const onClickSubmitBtn = async (id) => {
-    if (editTitleRef.current.value.length > 0) {
-      const nextTodoList = tasks.map((task) => ({
-        ...task,
-        title: task.id === id ? newTitle : task.title,
-        content: task.id === id ? newContent : task.content,
-      }));
+    if (window.confirm("해당 내용으로 수정하시겠습니까?")) {
+      if (editTitleRef.current.value.length > 0) {
+        const nextTodoList = tasks.map((task) => ({
+          ...task,
+          title: task.id === id ? newTitle : task.title,
+          content: task.id === id ? newContent : task.content,
+        }));
 
-      setTasks(nextTodoList);
+        setTasks(nextTodoList);
 
-      await updateTask(id, newTitle, newContent);
-      setEdited(false);
-    } else {
-      alert("제목을 입력해주세요.");
+        await updateTask(id, newTitle, newContent);
+        setEdited(false);
+      } else {
+        alert("제목을 입력해주세요.");
+      }
     }
   };
 
