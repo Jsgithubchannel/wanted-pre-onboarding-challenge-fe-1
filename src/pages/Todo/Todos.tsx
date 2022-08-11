@@ -12,7 +12,12 @@ import TodoList from "./TodoList";
 import { useNavigate } from "react-router-dom";
 const Todos = () => {
   const navigate = useNavigate();
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<
+    Array<{
+      title: string;
+      content: string;
+    }>
+  >([]);
 
   useEffect(() => {
     const get = async () => {
@@ -22,12 +27,12 @@ const Todos = () => {
     get();
   }, []);
 
-  const addTask = (title, content) => {
+  const addTask = (title: string, content: string) => {
     setTasks([...tasks, { title, content }]);
     createTodo(title, content);
   };
 
-  const removeTask = (index, taskId) => {
+  const removeTask = (index: number, taskId: string) => {
     if (window.confirm("삭제하시겠습니까?")) {
       const newTasks = [...tasks];
       newTasks.splice(index, 1);
@@ -36,7 +41,7 @@ const Todos = () => {
     }
   };
 
-  const updateTask = (id, title, content) => {
+  const updateTask = (id: string, title: string, content: string) => {
     updateTodo(id, title, content);
   };
 
@@ -57,7 +62,7 @@ const Todos = () => {
             setTasks={setTasks}
             removeTask={removeTask}
             updateTask={updateTask}
-            key={task.id}
+            // key={task.id}
           />
         ))}
       </div>
