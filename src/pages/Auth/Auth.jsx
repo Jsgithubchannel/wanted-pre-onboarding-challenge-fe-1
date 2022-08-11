@@ -18,6 +18,13 @@ const Auth = () => {
     }
   };
 
+  const onEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const onPasswordChange = (e) => {
+    setPw(e.target.value);
+  };
+
   useEffect(() => {
     if (email.includes("@") && email.includes(".") && pw.length >= 8) {
       setDisabled(false);
@@ -34,7 +41,7 @@ const Auth = () => {
           type="email"
           autoComplete="current-email"
           placeholder="이메일"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={onEmailChange}
           required
           className="input-account"
         />
@@ -43,7 +50,7 @@ const Auth = () => {
           type="password"
           autoComplete="current-password"
           placeholder="비밀번호"
-          onChange={(e) => setPw(e.target.value)}
+          onChange={onPasswordChange}
           required
           className="input-account"
         />

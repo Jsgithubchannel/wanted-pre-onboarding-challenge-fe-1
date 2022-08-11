@@ -50,20 +50,11 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
     }
   };
 
-  const onChangeEditTask = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-    switch (name) {
-      case "title":
-        setNewTitle(value);
-        break;
-      case "content":
-        setNewContent(value);
-        break;
-
-      default:
-    }
+  const onTitleChange = (e) => {
+    setNewTitle(e.target.value);
+  };
+  const onContentChange = (e) => {
+    setNewContent(e.target.value);
   };
 
   return (
@@ -77,7 +68,7 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
                 name="title"
                 value={newTitle}
                 ref={editTitleRef}
-                onChange={onChangeEditTask}
+                onChange={onTitleChange}
                 className="input-todo"
                 placeholder={task.title}
               />
@@ -85,7 +76,7 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
                 type="text"
                 name="content"
                 value={newContent}
-                onChange={onChangeEditTask}
+                onChange={onContentChange}
                 className={`${styles.content} input-todo`}
                 placeholder={task.content}
               />
