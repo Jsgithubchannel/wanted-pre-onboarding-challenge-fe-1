@@ -16,7 +16,7 @@ export const getTodos = async () => {
     });
 };
 
-export const createTodo = async (title, content) => {
+export const createTodo = async (title: string, content: string) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -37,7 +37,11 @@ export const createTodo = async (title, content) => {
     });
 };
 
-export const updateTodo = async (id, title, content) => {
+export const updateTodo = async (
+  id: string,
+  title: string,
+  content: string
+) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -58,7 +62,7 @@ export const updateTodo = async (id, title, content) => {
     });
 };
 
-export const deleteTodo = async (id) => {
+export const deleteTodo = async (id: string) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
