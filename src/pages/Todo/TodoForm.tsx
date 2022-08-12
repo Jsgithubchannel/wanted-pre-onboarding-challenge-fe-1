@@ -2,15 +2,29 @@ import React, { useState } from "react";
 import styles from "./TodoForm.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-const TodoForm = ({ addTask }) => {
+
+interface IProp {
+  addTask: Function;
+}
+
+const TodoForm = ({ addTask }: IProp) => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    e.target.title.value && addTask(title, content);
-    setTitle("");
-    setContent("");
+    if (title.length > 0) {
+      addTask(title, content);
+      setTitle("");
+      setContent("");
+    } else alert("제목을 입력해주세요.");
+  };
+
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+  const onContentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setContent(e.target.value);
   };
 
   return (
@@ -21,7 +35,7 @@ const TodoForm = ({ addTask }) => {
           name="title"
           value={title}
           placeholder="할 일을 작성해보세요."
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={onTitleChange}
           className="input-todo"
         />
         <input
@@ -29,7 +43,7 @@ const TodoForm = ({ addTask }) => {
           name="content"
           value={content}
           placeholder="상세 내용을 작성해보세요."
-          onChange={(e) => setContent(e.target.value)}
+          onChange={onContentChange}
           className={`input-todo ${styles.paragraph}`}
         />
       </div>

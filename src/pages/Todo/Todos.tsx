@@ -26,12 +26,12 @@ const Todos = () => {
     get();
   }, []);
 
-  const addTask = (title: string, content: string) => {
+  const addTask = (title: string, content: string): void => {
     setTasks([...tasks, { title, content }]);
     createTodo(title, content);
   };
 
-  const removeTask = (index: number, taskId: string) => {
+  const removeTask = (index: number, taskId: string): void => {
     if (window.confirm("삭제하시겠습니까?")) {
       const newTasks = [...tasks];
       newTasks.splice(index, 1);
@@ -40,7 +40,7 @@ const Todos = () => {
     }
   };
 
-  const updateTask = (id: string, title: string, content: string) => {
+  const updateTask = (id: string, title: string, content: string): void => {
     updateTodo(id, title, content);
   };
 
