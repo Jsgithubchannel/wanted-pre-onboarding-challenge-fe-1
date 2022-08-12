@@ -30,10 +30,17 @@ interface IProps {
   updateTask: Function;
 }
 
-const TodoList = (props: IProps) => {
+const TodoList = ({
+  tasks,
+  task,
+  index,
+  setTasks,
+  removeTask,
+  updateTask,
+}: IProps) => {
   // property 'x' does not exist on type '{}' 해결
   let taskCopy: any = {};
-  taskCopy = Object.assign({}, props.task);
+  taskCopy = Object.assign({}, task);
 
   const editTitleRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -49,7 +56,7 @@ const TodoList = (props: IProps) => {
   }, [edited]);
 
   const onNavigate = (index: number) => {
-    !edited && navigate(`/detail/${index}`, { state: props.tasks[index] });
+    !edited && navigate(`/detail/${index}`, { state: tasks[index] });
   };
 
   const onClickEditBtn = () => {
@@ -62,15 +69,15 @@ const TodoList = (props: IProps) => {
         editTitleRef?.current?.value &&
         editTitleRef.current.value.length > 0
       ) {
-        const nextTodoList = props.tasks.map((task) => ({
+        const nextTodoList = tasks.map((task) => ({
           ...task,
           title: task.id === id ? newTitle : task.title,
           content: task.id === id ? newContent : task.content,
         }));
 
-        props.setTasks(nextTodoList);
+        setTasks(nextTodoList);
 
-        await props.updateTask(id, newTitle, newContent);
+        await updateTask(id, newTitle, newContent);
         setEdited(false);
       } else {
         alert("제목을 입력해주세요.");
@@ -87,11 +94,8 @@ const TodoList = (props: IProps) => {
 
   return (
     <>
-      <ul className={styles.todo} key={props.index}>
-        <div
-          className={styles.paragraph}
-          onClick={() => onNavigate(props.index)}
-        >
+      <ul className={styles.todo} key={index}>
+        <div className={styles.paragraph} onClick={() => onNavigate(index)}>
           {edited ? (
             <>
               <input
@@ -141,7 +145,7 @@ const TodoList = (props: IProps) => {
             />
             <FontAwesomeIcon
               icon={faTrash}
-              onClick={() => props.removeTask(props.index, taskCopy.id)}
+              onClick={() => removeTask(index, taskCopy.id)}
               className={styles.trashIcon}
             />
           </div>
