@@ -9,7 +9,7 @@ const Auth = () => {
   const [pw, setPw] = useState("");
   const [isDisabled, setDisabled] = useState(true);
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const response = await requestLogin(email, pw);
     if (response === "success") {
@@ -18,10 +18,10 @@ const Auth = () => {
     }
   };
 
-  const onEmailChange = (e) => {
+  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
-  const onPasswordChange = (e) => {
+  const onPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPw(e.target.value);
   };
 

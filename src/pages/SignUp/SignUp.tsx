@@ -10,7 +10,7 @@ const SignUp = () => {
   const [rePw, setRePw] = useState("");
   const [isDisabled, setDisabled] = useState(true);
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (pw !== rePw) {
       alert("비밀번호가 일치하지 않습니다.");
