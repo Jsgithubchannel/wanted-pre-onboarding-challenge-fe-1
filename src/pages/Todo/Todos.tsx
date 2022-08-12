@@ -14,8 +14,7 @@ const Todos = () => {
   const navigate = useNavigate();
   const [tasks, setTasks] = useState<
     Array<{
-      title: string;
-      content: string;
+      [key: string]: string;
     }>
   >([]);
 
@@ -62,7 +61,7 @@ const Todos = () => {
             setTasks={setTasks}
             removeTask={removeTask}
             updateTask={updateTask}
-            // key={task.id}
+            key={task.id}
           />
         ))}
       </div>

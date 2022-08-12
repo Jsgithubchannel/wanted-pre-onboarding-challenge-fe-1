@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -9,8 +15,27 @@ import {
 import { useNavigate } from "react-router-dom";
 import styles from "./TodoList.module.scss";
 
-const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
-  const editTitleRef = useRef(null);
+interface IProps {
+  tasks: Array<{ [key: string]: string }>;
+  task: Object;
+  index: number;
+  setTasks: Dispatch<
+    SetStateAction<
+      {
+        [key: string]: string;
+      }[]
+    >
+  >;
+  removeTask: Function;
+  updateTask: Function;
+}
+
+const TodoList = (props: IProps) => {
+  // property 'x' does not exist on type '{}' 해결
+  let taskCopy: any = {};
+  taskCopy = Object.assign({}, props.task);
+
+  const editTitleRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   const [edited, setEdited] = useState(false);
@@ -19,30 +44,33 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
 
   useEffect(() => {
     if (edited) {
-      editTitleRef.current.focus();
+      editTitleRef.current?.focus();
     }
   }, [edited]);
 
-  const onNavigate = (index) => {
-    !edited && navigate(`/detail/${index}`, { state: tasks[index] });
+  const onNavigate = (index: number) => {
+    !edited && navigate(`/detail/${index}`, { state: props.tasks[index] });
   };
 
   const onClickEditBtn = () => {
     setEdited(true);
   };
 
-  const onClickSubmitBtn = async (id) => {
+  const onClickSubmitBtn = async (id: string) => {
     if (window.confirm("해당 내용으로 수정하시겠습니까?")) {
-      if (editTitleRef.current.value.length > 0) {
-        const nextTodoList = tasks.map((task) => ({
+      if (
+        editTitleRef?.current?.value &&
+        editTitleRef.current.value.length > 0
+      ) {
+        const nextTodoList = props.tasks.map((task) => ({
           ...task,
           title: task.id === id ? newTitle : task.title,
           content: task.id === id ? newContent : task.content,
         }));
 
-        setTasks(nextTodoList);
+        props.setTasks(nextTodoList);
 
-        await updateTask(id, newTitle, newContent);
+        await props.updateTask(id, newTitle, newContent);
         setEdited(false);
       } else {
         alert("제목을 입력해주세요.");
@@ -50,17 +78,20 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
     }
   };
 
-  const onTitleChange = (e) => {
+  const onTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewTitle(e.target.value);
   };
-  const onContentChange = (e) => {
+  const onContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewContent(e.target.value);
   };
 
   return (
     <>
-      <ul className={styles.todo} key={task.index}>
-        <div className={styles.paragraph} onClick={() => onNavigate(index)}>
+      <ul className={styles.todo} key={props.index}>
+        <div
+          className={styles.paragraph}
+          onClick={() => onNavigate(props.index)}
+        >
           {edited ? (
             <>
               <input
@@ -70,21 +101,20 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
                 ref={editTitleRef}
                 onChange={onTitleChange}
                 className="input-todo"
-                placeholder={task.title}
+                placeholder={taskCopy.title}
               />
               <textarea
-                type="text"
                 name="content"
                 value={newContent}
                 onChange={onContentChange}
                 className={`${styles.content} input-todo`}
-                placeholder={task.content}
+                placeholder={taskCopy.content}
               />
             </>
           ) : (
             <>
-              <span className={styles.todoTitle}>{task.title}</span>
-              <p className={styles.todoContent}>{task.content}</p>
+              <span className={styles.todoTitle}>{taskCopy.title}</span>
+              <p className={styles.todoContent}>{taskCopy.content}</p>
             </>
           )}
         </div>
@@ -93,7 +123,7 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
           <div className={styles.btns}>
             <FontAwesomeIcon
               icon={faCircleCheck}
-              onClick={() => onClickSubmitBtn(task.id)}
+              onClick={() => onClickSubmitBtn(taskCopy.id)}
               className={styles.checkIcon}
             />
             <FontAwesomeIcon
@@ -111,7 +141,7 @@ const TodoList = ({ tasks, task, index, setTasks, removeTask, updateTask }) => {
             />
             <FontAwesomeIcon
               icon={faTrash}
-              onClick={() => removeTask(index, task.id)}
+              onClick={() => props.removeTask(props.index, taskCopy.id)}
               className={styles.trashIcon}
             />
           </div>
