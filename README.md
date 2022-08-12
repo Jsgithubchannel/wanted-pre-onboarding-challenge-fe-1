@@ -1,5 +1,10 @@
 # 👩🏻‍💻 원티드 프리온보딩 챌린지 프론트엔드 코스 사전과제
 
+## 챌린지 첫째날 회고
+https://breathtaking-life.tistory.com/172
+
+
+
 ##  기능 / 소개
 ### Login / SignUp
 - /auth 경로에 로그인, /signup에 회원가입 기능 구현 완료
