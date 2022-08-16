@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import styles from "./Todos.module.scss";
+import { useQuery } from "react-query";
 
 import {
   createTodo,
@@ -18,13 +19,9 @@ const Todos = () => {
     }>
   >([]);
 
-  useEffect(() => {
-    const get = async () => {
-      const response = await getTodos();
-      setTasks(response.data);
-    };
-    get();
-  }, []);
+  useQuery(["data"], getTodos, {
+    onSuccess: ({ data }) => setTasks(data),
+  });
 
   const addTask = (title: string, content: string): void => {
     setTasks([...tasks, { title, content }]);
